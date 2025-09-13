@@ -1,4 +1,4 @@
-
+import { createStore } from "redux";
 
 
 const ADD_TASK = "task/add";
@@ -33,4 +33,28 @@ const TaskReducer = (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
+
+
+const store = createStore(TaskReducer);
+console.log(store);
+
+
+console.log("initial state:", store.getState());
+
+
+store.dispatch({
+    type: ADD_TASK,
+    payload: "ajit is master of mente"
+});
+store.dispatch({
+    type: ADD_TASK,
+    payload: "sujit is master of mente"
+});
+console.log("updated state :",store.getState());
+store.dispatch({
+    type:DELETE_TASK ,
+    payload: 1
+});
+console.log("updated state :",store.getState());
+
