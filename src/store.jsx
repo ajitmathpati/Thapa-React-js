@@ -51,10 +51,38 @@ store.dispatch({
     type: ADD_TASK,
     payload: "sujit is master of mente"
 });
-console.log("updated state :",store.getState());
-store.dispatch({
-    type:DELETE_TASK ,
-    payload: 1
-});
-console.log("updated state :",store.getState());
+
+
+
+console.log("updated state :", store.getState());
+// store.dispatch({
+//     type: DELETE_TASK,
+//     payload: 1
+// });
+// console.log("updated state :", store.getState());
+
+// ! Action Creator 
+
+
+const AddTask = (Data) => {
+    return {
+        type: ADD_TASK,
+        payload: Data
+    };
+
+};
+store.dispatch(AddTask("Vipashna is my best friend"));
+store.dispatch(AddTask('balaji is my friend'));
+
+
+const Delete = (Data) => {
+ return{
+    type:DELETE_TASK,
+    payload:Data
+ };
+};
+store.dispatch(Delete(2))
+store.dispatch(Delete(1))
+
+console.log("updated state :", store.getState());
 
