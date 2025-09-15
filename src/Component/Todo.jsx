@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 import { AddTask } from "../store";
 import { Delete } from "../store";
+import { fetchTask } from "../store";
 const Todo = () => {
     const [task, setTask] = useState("");
     const Dispatch = useDispatch();
@@ -23,6 +24,9 @@ const Todo = () => {
         Dispatch(Delete(Data));
 
     }
+    const HandelFatchTask = () => {
+        Dispatch(fetchTask())
+    }
 
     return (
         <>
@@ -39,6 +43,7 @@ const Todo = () => {
                             <button type="submit">Add Task</button>
                         </form>
                     </div>
+                    <button className="fatchtask" onClick={HandelFatchTask}>Fetch task</button>
                     <ul className="listcontainer">
                         {
                             State.map((curEle, index) => {
