@@ -1,8 +1,14 @@
 import { createStore } from "redux";
+import { composeWithDevTools } from '@redux-devtools/extension';
+import { applyMiddleware } from "redux";
+import { thunk } from "redux-thunk";
+
+
 
 
 const ADD_TASK = "task/add";
 const DELETE_TASK = "task/delete";
+const FETCH_TASK = "task/fetch";
 
 const initialState = {
     task: []
@@ -30,31 +36,37 @@ const TaskReducer = (state = initialState, action) => {
                 task: updateData,
 
             }
+        case FETCH_TASK:
+            return {
+                ...state,
+                task: [...state.task, ...action.payload]
+            }
         default:
             return state;
     }
+
 };
 
 
-const store = createStore(TaskReducer);
+export const store = createStore(TaskReducer, composeWithDevTools(applyMiddleware(thunk)));
 console.log(store);
 
 
 console.log("initial state:", store.getState());
 
 
-store.dispatch({
-    type: ADD_TASK,
-    payload: "ajit is master of mente"
-});
-store.dispatch({
-    type: ADD_TASK,
-    payload: "sujit is master of mente"
-});
+// store.dispatch({
+//     type: ADD_TASK,
+//     payload: "ajit is master of mente"
+// });
+// store.dispatch({
+//     type: ADD_TASK,
+//     payload: "sujit is master of mente"
+// });
 
 
 
-console.log("updated state :", store.getState());
+// console.log("updated state :", store.getState());
 // store.dispatch({
 //     type: DELETE_TASK,
 //     payload: 1
@@ -64,25 +76,47 @@ console.log("updated state :", store.getState());
 // ! Action Creator 
 
 
-const AddTask = (Data) => {
+export const AddTask = (Data) => {
     return {
         type: ADD_TASK,
         payload: Data
     };
 
 };
-store.dispatch(AddTask("Vipashna is my best friend"));
-store.dispatch(AddTask('balaji is my friend'));
+// store.dispatch(AddTask("Vipashna is my best friend"));
+// store.dispatch(AddTask('balaji is my friend'));
 
 
-const Delete = (Data) => {
- return{
-    type:DELETE_TASK,
-    payload:Data
- };
+export const Delete = (Data) => {
+    return {
+        type: DELETE_TASK,
+        payload: Data
+    };
 };
-store.dispatch(Delete(2))
-store.dispatch(Delete(1))
+// store.dispatch(Delete(2))
+// store.dispatch(Delete(1))
+
+export const fetchTask = () => {
+    return async (dispatch) => {
+        try {
+            const res = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=5 ");
+            const data = await res.json();
+            dispatch({
+                type: FETCH_TASK,
+                payload: data.map((curtask)=>curtask.title)
+            })
+            console.log(data);
+
+
+        } catch (error) {
+            console.log(error);
+
+
+        };
+
+    }
+
+}
 
 console.log("updated state :", store.getState());
 
