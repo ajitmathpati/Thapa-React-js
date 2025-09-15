@@ -1,0 +1,119 @@
+/* Container Centering */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f6f7fb;
+}
+
+/* App Box */
+.todo-app {
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Heading */
+.todo-app h1 {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.todo-app h1 i {
+  color: #5c6bc0;
+  margin-right: 10px;
+}
+
+/* Input Row */
+.row form {
+  display: flex;
+  gap: 10px;
+}
+
+.input-box {
+  flex: 1;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input-box:focus {
+  border-color: #5c6bc0;
+}
+
+/* Button */
+.row button {
+  padding: 10px 15px;
+  background-color: #5c6bc0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.row button:hover {
+  background-color: #3f51b5;
+}
+
+/* Task List */
+.listcontainer {
+  list-style: none;
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+.listcontainer li {
+  background-color: #f1f1f1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Delete Button */
+.delete-btn {
+  cursor: pointer;
+  color: #e53935;
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+
+.Icon-style {
+  font-size: 24px;
+  /* icon size */
+  color: #d11a2a;
+  /* red color for delete */
+  cursor: pointer;
+  /* hand cursor */
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.Icon-style:hover {
+  color: #a30000;
+  /* dark red on hover */
+  transform: scale(1.2);
+  /* thoda zoom effect */
+}
+
+.Icon-style:active {
+  transform: scale(0.9);
+  /* click pe thoda shrink */
+}
