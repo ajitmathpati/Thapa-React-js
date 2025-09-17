@@ -1,9 +1,9 @@
-import { createStore } from "redux";
+// import { createStore } from "redux";
 import { composeWithDevTools } from '@redux-devtools/extension';
-import { applyMiddleware } from "redux";
-import { thunk } from "redux-thunk";
-
-
+// import { applyMiddleware } from "redux";
+// import { thunk } from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 
 const ADD_TASK = "task/add";
@@ -18,39 +18,45 @@ const initialState = {
 
 
 
-const TaskReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ADD_TASK:
-            return {
-                ...state,
-                task: [...state.task, action.payload],
+// const TaskReducer = (state = initialState, action) => {
+switch (action.type) {
+    case ADD_TASK:
+        return {
+            ...state,
+            task: [...state.task, action.payload],
 
-            }
-        case DELETE_TASK:
-            const updateData = state.task.filter((curEle, index) => {
+        }
+    case DELETE_TASK:
+        const updateData = state.task.filter((curEle, index) => {
 
-                return index !== action.payload;
-            });
-            return {
-                ...state,
-                task: updateData,
+            return index !== action.payload;
+        });
+        return {
+            ...state,
+            task: updateData,
 
-            }
-        case FETCH_TASK:
-            return {
-                ...state,
-                task: [...state.task, ...action.payload]
-            }
-        default:
-            return state;
-    }
+        }
+    case FETCH_TASK:
+        return {
+            ...state,
+            task: [...state.task, ...action.payload]
+        }
+    default:
+        return state;
+}
 
-};
+// };
 
+//! this traditional way to create store 
+// export const store = createStore(TaskReducer, composeWithDevTools(applyMiddleware(thunk)));
+// console.log(store);
 
-export const store = createStore(TaskReducer, composeWithDevTools(applyMiddleware(thunk)));
-console.log(store);
-
+//! we create new store with the help of redux toolkit
+export const store = configureStore({
+    reducer: {
+        TaskReducer,
+    },
+});
 
 console.log("initial state:", store.getState());
 
@@ -96,6 +102,19 @@ export const Delete = (Data) => {
 // store.dispatch(Delete(2))
 // store.dispatch(Delete(1))
 
+// ! create slice 
+const TaskReducer = createSlice({
+    name: "Task",
+    initialState,
+    reducers: {
+        AddTask(state, action) { },
+        Delete(state, action) { }
+    },
+});
+
+const { AddTask, Delete } = TaskReducer.actions;
+
+
 export const fetchTask = () => {
     return async (dispatch) => {
         try {
@@ -103,7 +122,7 @@ export const fetchTask = () => {
             const data = await res.json();
             dispatch({
                 type: FETCH_TASK,
-                payload: data.map((curtask)=>curtask.title)
+                payload: data.map((curtask) => curtask.title)
             })
             console.log(data);
 
