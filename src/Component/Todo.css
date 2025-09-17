@@ -117,3 +117,28 @@
   transform: scale(0.9);
   /* click pe thoda shrink */
 }
+
+.fatchtask {
+  background-color: #4CAF50;
+  /* Green background */
+  color: white;
+  /* White text */
+  padding: 10px 20px;
+  /* Top/Bottom 10px, Left/Right 20px */
+  font-size: 16px;
+  /* Text size */
+  border: none;
+  /* Remove default border */
+  border-radius: 5px;
+  /* Rounded corners */
+  cursor: pointer;
+  /* Pointer on hover */
+  transition: background 0.3s;
+  /* Smooth hover effect */
+  margin-top: 10px;
+}
+
+.fatchtask:hover {
+  background-color: #45a049;
+  /* Darker green on hover */
+}

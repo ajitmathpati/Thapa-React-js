@@ -2,14 +2,15 @@ import "./Todo.css";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { useState } from "react";
-import { AddTask } from "../store";
-import { Delete } from "../store";
-import { fetchTask } from "../store";
+import { AddTask, Delete } from "../store";
+import { store } from "../store";
+
+// import { fetchTask } from "../store";
 const Todo = () => {
     const [task, setTask] = useState("");
     const Dispatch = useDispatch();
 
-    const State = useSelector((State) => State.task);
+    const State = useSelector((State) => State.TaskReducer.task);
     console.log(State);
     const HandelForm = (e) => {
         e.preventDefault();
@@ -24,9 +25,9 @@ const Todo = () => {
         Dispatch(Delete(Data));
 
     }
-    const HandelFatchTask = () => {
-        Dispatch(fetchTask())
-    }
+    // const HandelFatchTask = () => {
+    //     Dispatch(fetchTask())
+    // }
 
     return (
         <>
@@ -43,7 +44,7 @@ const Todo = () => {
                             <button type="submit">Add Task</button>
                         </form>
                     </div>
-                    <button className="fatchtask" onClick={HandelFatchTask}>Fetch task</button>
+                    {/* <button className="fatchtask" onClick={HandelFatchTask}>Fetch task</button> */}
                     <ul className="listcontainer">
                         {
                             State.map((curEle, index) => {

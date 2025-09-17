@@ -116,9 +116,9 @@ const TaskReducer = createSlice({
     },
 });
 
-const { AddTask, Delete } = TaskReducer.actions;
+export const { AddTask, Delete } = TaskReducer.actions;
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
 
         TaskReducer: TaskReducer.reducer,
